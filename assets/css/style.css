@@ -1,0 +1,136 @@
+/* CSS Reset */
+:root{
+    --color-body-bg: #F9FFEE;
+    --color-slider-bg: #ffffff;
+    --color-card-title: #292929;
+    --color-card-text: #04030169;
+    --color-card-title-active: #ffffff;
+    --color-card-text-active: #fffffa99;
+    --font-primary: "Inter", serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--color-body-bg);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.main {
+    overflow-x: clip;
+    padding: 5rem 20px;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.tf-slider {
+    /* Adjust with your preference */
+    --_inactive-slide-size: 116px;
+    --_card-header-size: 380px;
+
+    /* Don't Update This Values */
+    --_active-slide-size: calc(var(--_slider-size) - (var(--_inactive-slide-size) * (var(--_total-slides) - 1)));
+    --_card-body-size: calc(var(--_active-slide-size) - var(--_card-header-size));
+
+    overflow: hidden;
+    background-color: var(--color-slider-bg);
+    border-radius: 40px;
+
+    .tf-slider_wrapper {
+        display: flex;
+    }
+
+    .tf-slider_slide {
+        flex-shrink: unset;
+        width: unset !important;
+        height: unset;
+        display: flex;
+        flex-basis: var(--_inactive-slide-size);
+        transition: flex-grow 0.4s ease;
+        overflow: hidden;
+        
+        &:not(.swiper-slide-active) {
+            cursor: pointer;
+
+            .tf-card_image {
+                max-width: var(--_inactive-slide-size);
+            }
+
+            &:is(:hover, :focus-visible) {
+                .tf-card_image {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}
+
+.tf-card {
+    display: flex;
+
+    .tf-card_header {
+        position: relative;
+        width: var(--_card-header-size);
+        flex-shrink: 0;
+        padding-top: 40%;
+
+        .tf-card_image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.25s ease-in-out;
+        }
+    }
+
+    .tf-card_body {
+        flex-shrink: 0;
+        width: var(--_card-body-size);
+        display: grid;
+        grid-template-columns: 0fr;
+        position: absolute;
+        left: var(--_card-header-size);
+        padding-top: 64px;
+        padding-right: 64px;
+        opacity: 0;
+        transition: opacity 0.3s 0.3s linear;
+    }
+
+    .tf-card_body_content {
+        overflow: hidden;
+    }
+}
+
+.swiper-slide-active {
+    flex-grow: 1;
+
+    .tf-card_header {
+        .tf-card_image {
+            transform: scale(0.75);
+            border-radius: 30px;
+        }
+    }
+
+    .tf-card_body {
+        grid-template-columns: 1fr;
+        position: unset;
+        opacity: 1;
+    }
+}
