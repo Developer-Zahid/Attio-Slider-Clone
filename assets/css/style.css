@@ -107,14 +107,44 @@ img {
         grid-template-columns: 0fr;
         position: absolute;
         left: var(--_card-header-size);
-        padding-top: 64px;
+        padding-top: 100px;
         padding-right: 64px;
-        opacity: 0;
+        /* opacity: 0; */
         transition: opacity 0.3s 0.3s linear;
     }
 
     .tf-card_body_content {
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    
+    .tf-card_content_quote {
+        margin-top: 64px;
+        font-weight: 500;
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+
+        .line {
+            overflow: hidden;
+        }
+    }
+
+    .tf-card_content_author {
+        font-weight: 300;
+    }
+
+    .tf-card_content_author_name {
+        font-weight: 600;
+    }
+
+    .tf-card_content_footer {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        padding-block: 30px;
     }
 }
 
